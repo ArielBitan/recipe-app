@@ -1,0 +1,135 @@
+{
+  "recipes": [
+    {
+      "id": "1",
+      "title": "Chocolate Cake",
+      "image": "./images/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg",
+      "ingredients": [
+        "2 cups of flour",
+        "1 cup of sugar",
+        "1/2 cup of cocoa powder"
+      ],
+      "instructions": "Mix ingredients. Bake for 30 minutes.",
+      "category": "Dessert"
+    },
+    {
+      "id": "2",
+      "title": "Pancakes",
+      "image": "/images/burger-with-melted-cheese.webp",
+      "ingredients": [
+        "1 cup of flour",
+        "2 tablespoons of sugar",
+        "1 cup of milk",
+        "1 egg",
+        "1 teaspoon of vanilla extract"
+      ],
+      "instructions": "Whisk ingredients together. Cook on a skillet until golden brown.",
+      "category": "Breakfast"
+    },
+    {
+      "id": "3",
+      "title": "Caesar Salad",
+      "image": "/images/images.jpg",
+      "ingredients": [
+        "1 head of romaine lettuce",
+        "1/2 cup of croutons",
+        "1/4 cup of Caesar dressing",
+        "2 tablespoons of grated Parmesan cheese"
+      ],
+      "instructions": "Toss all ingredients together in a large bowl.",
+      "category": "Salad"
+    },
+    {
+      "id": "4",
+      "title": "Spaghetti Carbonara",
+      "image": "/images/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg",
+      "ingredients": [
+        "200g of spaghetti",
+        "100g of pancetta",
+        "2 eggs",
+        "1/2 cup of grated Parmesan cheese",
+        "Salt and pepper to taste"
+      ],
+      "instructions": "Cook spaghetti. Fry pancetta. Mix eggs and cheese, then combine everything.",
+      "category": "Main Course"
+    },
+    {
+      "id": "5",
+      "title": "Mango Smoothie",
+      "image": "/images/images.jpg",
+      "ingredients": [
+        "1 cup of diced mango",
+        "1/2 cup of yogurt",
+        "1/2 cup of milk",
+        "1 tablespoon of honey"
+      ],
+      "instructions": "Blend all ingredients until smooth.",
+      "category": "Beverage"
+    },
+    {
+      "id": "6",
+      "title": "Grilled Cheese Sandwich",
+      "image": "/images/burger-with-melted-cheese.webp",
+      "ingredients": ["2 slices of bread", "2 slices of cheese", "Butter"],
+      "instructions": "Butter the bread. Place cheese between slices. Grill until golden.",
+      "category": "Snack"
+    }
+  ],
+
+  "hero": [
+    {
+      "title": "Chicken Steak",
+      "subtitle": "A heartwarming Italian-American soup, featuring fresh okra and an aromatic blend of traditional spices.",
+      "image": "https://picsum.photos/seed/DCMCBfz82/800/500?grayscale&blur=4",
+      "cta": {
+        "text": "Go to recipe",
+        "link": "/recipes/chicken-steak"
+      }
+    },
+    {
+      "title": "Mediterranean Parrotfish Soup",
+      "subtitle": "A succulent pigeon steak, encased in a crunchy asafoetida crust, served with a side of jerk mashed beans.",
+      "image": "https://picsum.photos/seed/Lsvs8/800/500?blur=9",
+      "cta": {
+        "text": "Go to recipe",
+        "link": "/recipes/mediterranean-parrotfish-soup"
+      }
+    },
+    {
+      "title": "Risotto With Seafood",
+      "subtitle": "Fresh peaches with a pinch of achiote seed, topped by a caramelized avocado with whipped cream.",
+      "image": "https://picsum.photos/seed/1Vfk1/800/500?grayscale",
+      "cta": {
+        "text": "Go to recipe",
+        "link": "/recipes/risotto-with-seafood"
+      }
+    },
+    {
+      "title": "Juniper Berry And Lemon Tart",
+      "subtitle": "Grilled duck kebabs, marinated in Sami spices and served with a fresh beetroot and tangelo salad.",
+      "image": "https://picsum.photos/seed/yoUOdhxYkZ/800/500?blur=5",
+      "cta": {
+        "text": "Go to recipe",
+        "link": "/recipes/juniper-berry-and-lemon-tart"
+      }
+    },
+    {
+      "title": "Chilli Con Carne",
+      "subtitle": "A classic pie filled with delicious chicken and crispy mullet, baked in a fluffy pastry crust and topped with a golden-brown lattice.",
+      "image": "https://picsum.photos/seed/c1wjdqlE6/800/500?blur=9",
+      "cta": {
+        "text": "Go to recipe",
+        "link": "/recipes/chilli-con-carne"
+      }
+    },
+    {
+      "title": "Nectarine Pie",
+      "subtitle": "Hearty coffee and venison stew, slow-cooked with pepper and asparagus for a comforting, flavorful meal.",
+      "image": "https://picsum.photos/seed/AivvYDcw5/800/500?grayscale&blur=4",
+      "cta": {
+        "text": "Go to recipe",
+        "link": "/recipes/nectarine-pie"
+      }
+    }
+  ]
+}
