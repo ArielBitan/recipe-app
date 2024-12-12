@@ -26,6 +26,16 @@ export const Navbar = () => {
             <Link to="/about">About</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className="focus:underline">
+            <Link to="/profile">Profile</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className="focus:underline">
+            <Link to="/add-recipe">Add Recipe</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   );

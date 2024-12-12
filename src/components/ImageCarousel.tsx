@@ -10,13 +10,15 @@ import Autoplay from "embla-carousel-autoplay";
 import { api } from "@/api";
 import { useEffect, useState } from "react";
 
+interface CarouselItemType {
+  title: string;
+  subtitle: string;
+  image: string;
+}
+
 export const ImageCarousel = () => {
-  const imageArr = [
-    "/images/burger-with-melted-cheese.webp",
-    "/images/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg",
-    "/images/images.jpg",
-  ];
-  const [carouselItems, setCarouselItems] = useState([]);
+  const [carouselItems, setCarouselItems] = useState<CarouselItemType[]>([]);
+
   useEffect(() => {
     (async () => {
       const { data } = await api.get("hero");
@@ -38,9 +40,13 @@ export const ImageCarousel = () => {
       ]}
     >
       <CarouselContent>
-        {imageArr.map((image, index) => (
+        {carouselItems.map((item, index) => (
           <CarouselItem key={index}>
-            <Image imageUrl={image} />
+            <Image
+              image={item.image}
+              title={item.title}
+              subtitle={item.subtitle}
+            />
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -80,56 +80,32 @@
     {
       "title": "Chicken Steak",
       "subtitle": "A heartwarming Italian-American soup, featuring fresh okra and an aromatic blend of traditional spices.",
-      "image": "https://picsum.photos/seed/DCMCBfz82/800/500?grayscale&blur=4",
-      "cta": {
-        "text": "Go to recipe",
-        "link": "/recipes/chicken-steak"
-      }
+      "image": "https://picsum.photos/seed/DCMCBfz82/800/500?grayscale&blur=4"
     },
     {
       "title": "Mediterranean Parrotfish Soup",
       "subtitle": "A succulent pigeon steak, encased in a crunchy asafoetida crust, served with a side of jerk mashed beans.",
-      "image": "https://picsum.photos/seed/Lsvs8/800/500?blur=9",
-      "cta": {
-        "text": "Go to recipe",
-        "link": "/recipes/mediterranean-parrotfish-soup"
-      }
+      "image": "https://picsum.photos/seed/Lsvs8/800/500?blur=9"
     },
     {
       "title": "Risotto With Seafood",
       "subtitle": "Fresh peaches with a pinch of achiote seed, topped by a caramelized avocado with whipped cream.",
-      "image": "https://picsum.photos/seed/1Vfk1/800/500?grayscale",
-      "cta": {
-        "text": "Go to recipe",
-        "link": "/recipes/risotto-with-seafood"
-      }
+      "image": "https://picsum.photos/seed/1Vfk1/800/500?grayscale"
     },
     {
       "title": "Juniper Berry And Lemon Tart",
       "subtitle": "Grilled duck kebabs, marinated in Sami spices and served with a fresh beetroot and tangelo salad.",
-      "image": "https://picsum.photos/seed/yoUOdhxYkZ/800/500?blur=5",
-      "cta": {
-        "text": "Go to recipe",
-        "link": "/recipes/juniper-berry-and-lemon-tart"
-      }
+      "image": "https://picsum.photos/seed/yoUOdhxYkZ/800/500?blur=5"
     },
     {
       "title": "Chilli Con Carne",
       "subtitle": "A classic pie filled with delicious chicken and crispy mullet, baked in a fluffy pastry crust and topped with a golden-brown lattice.",
-      "image": "https://picsum.photos/seed/c1wjdqlE6/800/500?blur=9",
-      "cta": {
-        "text": "Go to recipe",
-        "link": "/recipes/chilli-con-carne"
-      }
+      "image": "https://picsum.photos/seed/c1wjdqlE6/800/500?blur=9"
     },
     {
       "title": "Nectarine Pie",
       "subtitle": "Hearty coffee and venison stew, slow-cooked with pepper and asparagus for a comforting, flavorful meal.",
-      "image": "https://picsum.photos/seed/AivvYDcw5/800/500?grayscale&blur=4",
-      "cta": {
-        "text": "Go to recipe",
-        "link": "/recipes/nectarine-pie"
-      }
+      "image": "https://picsum.photos/seed/AivvYDcw5/800/500?grayscale&blur=4"
     }
   ]
 }

@@ -1,37 +1,25 @@
 import { ImageCarousel } from "@/components/ImageCarousel";
 import { Navbar } from "@/components/NavBar";
-import { faker } from "@faker-js/faker";
-import { api } from "@/api";
+import RecipeList from "@/components/RecipeList";
+
 const Home = () => {
-  function generateHeroData(count = 6) {
-    const heroArray = [];
-    for (let i = 0; i < count; i++) {
-      const title = faker.food.dish();
-      heroArray.push({
-        title: title,
-        subtitle: faker.food.description(),
-        image: faker.image.urlPicsumPhotos({ width: 800, height: 500 }),
-        cta: {
-          text: "Go to recipe",
-          link: `/recipes/${title.toLowerCase().replace(/\s+/g, "-")}`,
-        },
-      });
-    }
-    return heroArray;
-  }
-
-  async function populateData() {
-    await api.post("hero", { ...generateHeroData() });
-  }
-
-  populateData();
-
   return (
     <div className="w-full flex items-center justify-center flex-col">
       <Navbar />
-      <div className="bg-secondary w-max">
-        <ImageCarousel />
-      </div>
+      <ImageCarousel />
+      <section className="py-8 text-center">
+        <h2 className="text-3xl font-semibold text-primary">
+          Welcome to my website
+        </h2>
+        <p className="mt-4 text-lg text-gray-600 max-w-4xl">
+          Discover delicious recipes, cook like a pro, and satisfy your
+          cravings! Explore a variety of meals from all around the world. Start
+          cooking now!
+        </p>
+      </section>
+      <section className="mb-8">
+        <RecipeList />
+      </section>
     </div>
   );
 };
