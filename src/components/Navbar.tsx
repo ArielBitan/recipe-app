@@ -8,26 +8,26 @@ import {
 
 export const Navbar = () => {
   return (
-    <NavigationMenu className="mb-6">
+    <NavigationMenu className="mb-6 font-primary">
       <NavigationMenuLink
         asChild
         className="text-3xl font-bold m-2 pt-4 text-primary px-4"
       >
         <Link to="/">Recipes-App</Link>
       </NavigationMenuLink>
-      <NavigationMenuList className="flex gap-4 m-2 text-xl pt-4 px-4">
-        <NavigationMenuItem>
+      <NavigationMenuList className="flex gap-4 m-2 text-xl pt-4 px-4 ">
+        <NavigationMenuItem className="hover:underline">
           <NavigationMenuLink asChild>
             <Link to="/recipes">Recipes</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink asChild className="focus:underline">
+          <NavigationMenuLink asChild className="hover:underline">
             <Link to="/about">About</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink asChild className="focus:underline">
+          <NavigationMenuLink asChild className="hover:underline">
             <Link to="/profile">Profile</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>

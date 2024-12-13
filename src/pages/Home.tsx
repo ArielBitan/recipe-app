@@ -9,7 +9,7 @@ const Home = () => {
       <ImageCarousel />
       <section className="py-8 text-center">
         <h2 className="text-3xl font-semibold text-primary">
-          Welcome to my website
+          Countless of recipes at your disposal
         </h2>
         <p className="mt-4 text-lg text-gray-600 max-w-4xl">
           Discover delicious recipes, cook like a pro, and satisfy your

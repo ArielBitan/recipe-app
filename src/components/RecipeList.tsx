@@ -26,6 +26,7 @@ const RecipeList = () => {
         filteredRecipes.map((recipe) => (
           <RecipeCard
             key={recipe.id}
+            recipeId={recipe.id}
             title={recipe.title}
             image={recipe.image}
           />

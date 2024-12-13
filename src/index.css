@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap");
+
 @layer base {
   :root {
     --background: 217 100% 95%;
@@ -53,6 +56,16 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .custom-list {
+    @apply list-inside list-disc text-lg;
+  }
+
+  .custom-list li::marker {
+    color: rgb(33, 34, 105);
   }
 }
 
