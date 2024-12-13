@@ -8,7 +8,7 @@ import {
 
 export const Navbar = () => {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="mb-6">
       <NavigationMenuLink
         asChild
         className="text-3xl font-bold m-2 pt-4 text-primary px-4"
@@ -29,11 +29,6 @@ export const Navbar = () => {
         <NavigationMenuItem>
           <NavigationMenuLink asChild className="focus:underline">
             <Link to="/profile">Profile</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className="focus:underline">
-            <Link to="/add-recipe">Add Recipe</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>

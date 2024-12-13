@@ -16,7 +16,7 @@ interface RecipeCardProps {
 
 export const RecipeCard: React.FC<RecipeCardProps> = ({ title, image }) => {
   return (
-    <Card className="flex flex-col items-center text-center">
+    <Card className="flex flex-col items-center text-center rounded">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>

@@ -1,18 +1,6 @@
 {
   "recipes": [
     {
-      "id": "1",
-      "title": "Chocolate Cake",
-      "image": "./images/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg",
-      "ingredients": [
-        "2 cups of flour",
-        "1 cup of sugar",
-        "1/2 cup of cocoa powder"
-      ],
-      "instructions": "Mix ingredients. Bake for 30 minutes.",
-      "category": "Dessert"
-    },
-    {
       "id": "2",
       "title": "Pancakes",
       "image": "/images/burger-with-melted-cheese.webp",
