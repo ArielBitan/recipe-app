@@ -1,50 +1,24 @@
 import { useState, useEffect } from "react";
-import { api } from "@/api";
 import { RecipeCard } from "./RecipeCard";
 import { useSearchParams } from "react-router-dom";
-
-interface Recipe {
-  id: string;
-  title: string;
-  image: string;
-  ingredients: string[];
-  instructions: string;
-  category: string;
-}
+import { Recipe } from "./context/ThemeContext";
+import { useRecipes } from "./context/ThemeContext";
 
 const RecipeList = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const { recipes, fetchRecipes, filterRecipes } = useRecipes();
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    (async () => {
-      const { data } = await api.get("recipes");
-      setRecipes(data);
-      setFilteredRecipes(data);
-    })();
+    fetchRecipes();
   }, []);
 
   useEffect(() => {
     const search = searchParams.get("search") || "";
     const category = searchParams.get("category") || "all";
-
-    let filtered = [...recipes];
-
-    if (category !== "all") {
-      filtered = filtered.filter(
-        (recipe) => recipe.category.toLowerCase() === category.toLowerCase()
-      );
-    }
-
-    if (search) {
-      filtered = filtered.filter((recipe) =>
-        recipe.title.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-
+    const filtered = filterRecipes(search, category);
     setFilteredRecipes(filtered);
-  }, [searchParams, recipes]);
+  }, [searchParams, recipes, filterRecipes]);
 
   return (
     <ul className="grid grid-cols-4 gap-6">
@@ -57,7 +31,9 @@ const RecipeList = () => {
           />
         ))
       ) : (
-        <p>No recipes found.</p>
+        <p className="col-span-4 text-center text-gray-500">
+          No recipes found.
+        </p>
       )}
     </ul>
   );
