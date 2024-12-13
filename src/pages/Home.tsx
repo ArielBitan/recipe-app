@@ -1,5 +1,5 @@
 import { ImageCarousel } from "@/components/ImageCarousel";
-import { Navbar } from "@/components/NavBar";
+import { Navbar } from "@/components/Navbar";
 import RecipeList from "@/components/RecipeList";
 
 const Home = () => {

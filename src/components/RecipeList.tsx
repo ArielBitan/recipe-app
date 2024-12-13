@@ -15,7 +15,7 @@ interface Recipe {
 const RecipeList = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     (async () => {
@@ -26,16 +26,24 @@ const RecipeList = () => {
   }, []);
 
   useEffect(() => {
-    const searchQuery = searchParams.get("search")?.toLowerCase() || "";
+    const search = searchParams.get("search") || "";
+    const category = searchParams.get("category") || "all";
 
-    if (searchQuery) {
-      const filtered = recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(searchQuery)
+    let filtered = [...recipes];
+
+    if (category !== "all") {
+      filtered = filtered.filter(
+        (recipe) => recipe.category.toLowerCase() === category.toLowerCase()
       );
-      setFilteredRecipes(filtered);
-    } else {
-      setFilteredRecipes(recipes);
     }
+
+    if (search) {
+      filtered = filtered.filter((recipe) =>
+        recipe.title.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    setFilteredRecipes(filtered);
   }, [searchParams, recipes]);
 
   return (

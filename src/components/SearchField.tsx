@@ -6,8 +6,15 @@ export function SearchField() {
   const [searchParams, setSearchParams] = useSearchParams();
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
-    setSearchParams(query ? { search: query } : {});
+
+    const updatedParams = {
+      ...Object.fromEntries(searchParams.entries()),
+      search: query,
+    };
+
+    setSearchParams(updatedParams);
   };
+
   return (
     <div className="flex w-full max-w-sm items-center space-x-2">
       <Input

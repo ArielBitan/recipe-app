@@ -1,18 +1,17 @@
 import RecipeList from "@/components/RecipeList";
-import { Navbar } from "@/components/NavBar";
+import { Navbar } from "@/components/Navbar";
 import { SearchField } from "@/components/SearchField";
 import AddRecipe from "@/components/AddRecipe";
-import { Link } from "react-router-dom";
+import RecipeFilter from "@/components/RecipeFilter";
 
 const Recipes = () => {
   return (
     <div className="flex flex-col items-center gap-6">
       <Navbar />
-      <div className="flex gap-6 justify-between">
+      <div className="flex gap-6 items-center">
+        <RecipeFilter />
         <SearchField />
-        <Link to="add-recipe">
-          <AddRecipe />
-        </Link>
+        <AddRecipe />
       </div>
       <RecipeList />
     </div>

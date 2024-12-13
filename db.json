@@ -25,7 +25,7 @@
         "2 tablespoons of grated Parmesan cheese"
       ],
       "instructions": "Toss all ingredients together in a large bowl.",
-      "category": "Salad"
+      "category": "Lunch"
     },
     {
       "id": "4",
@@ -39,7 +39,7 @@
         "Salt and pepper to taste"
       ],
       "instructions": "Cook spaghetti. Fry pancetta. Mix eggs and cheese, then combine everything.",
-      "category": "Main Course"
+      "category": "Dinner"
     },
     {
       "id": "5",
@@ -60,7 +60,7 @@
       "image": "/images/burger-with-melted-cheese.webp",
       "ingredients": ["2 slices of bread", "2 slices of cheese", "Butter"],
       "instructions": "Butter the bread. Place cheese between slices. Grill until golden.",
-      "category": "Snack"
+      "category": "Breakfast"
     }
   ],
 
