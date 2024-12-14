@@ -14,6 +14,9 @@ export default {
       minHeight: {
         custom: "650px",
       },
+      width: {
+        "75vw": "75vw",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

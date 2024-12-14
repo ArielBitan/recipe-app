@@ -22,26 +22,30 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
 }) => {
   return (
     <Link to={`/recipes/${recipeId}`}>
-      <Card className="flex flex-col items-center text-center rounded motion-preset-expand hover:-translate-y-4">
+      <Card className="flex flex-col items-center text-left motion-preset-expand hover:-translate-y-4">
         <CardHeader>
           <CardDescription>
-            <img
-              src={image}
-              alt="image"
-              className=" max-h-40 rounded-2xl m-4"
-            />
+            <div className="w-80">
+              <img
+                src={image}
+                alt="image"
+                className="w-full h-56 rounded-xl mb-2 object-cover"
+              />
+            </div>
           </CardDescription>
           <CardTitle>{title}</CardTitle>
         </CardHeader>
         <CardFooter>
-          <ReactStars
-            count={5}
-            size={35}
-            value={3}
-            activeColor="#ffd700"
-            edit={false}
-          />
-          300 Ratings
+          <div className="flex items-center justify-start gap-2">
+            <ReactStars
+              count={5}
+              size={25}
+              value={3}
+              activeColor="#ffd700"
+              edit={false}
+            />
+            <span className="font-light font-primary mt-1">300 Ratings</span>
+          </div>
         </CardFooter>
       </Card>
     </Link>

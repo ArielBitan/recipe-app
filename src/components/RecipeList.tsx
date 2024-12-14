@@ -21,7 +21,7 @@ const RecipeList = () => {
   }, [searchParams, recipes, filterRecipes]);
 
   return (
-    <ul className="grid grid-cols-4 gap-6">
+    <ul className="grid grid-cols-4 gap-10">
       {filteredRecipes.length > 0 ? (
         filteredRecipes.map((recipe) => (
           <RecipeCard
