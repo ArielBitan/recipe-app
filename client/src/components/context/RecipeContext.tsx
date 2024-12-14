@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useMemo } from "react";
 import { api } from "@/api";
 
 export interface Recipe {
-  id: string;
-  title: string;
+  _id: string;
+  name: string;
   image: string;
   ingredients: string[];
   instructions: string;
@@ -34,7 +34,9 @@ export const RecipesProvider = ({ children }: RecipeProviderProps) => {
   const fetchRecipes = async () => {
     setIsLoading(true);
     try {
-      const { data } = await api.get<Recipe[]>("recipes");
+      const { data } = await api.get<Recipe[]>("/recipes", {
+        withCredentials: true,
+      });
       setRecipes(data);
     } catch (error) {
       console.error("Error fetching Recipes:", error);
@@ -59,12 +61,12 @@ export const RecipesProvider = ({ children }: RecipeProviderProps) => {
     setIsLoading(true);
     try {
       const { data } = await api.put<Recipe>(
-        `recipes/${updatedRecipe.id}`,
+        `recipes/${updatedRecipe._id}`,
         updatedRecipe
       );
       setRecipes((prevRecipes) =>
         prevRecipes.map((recipe) =>
-          recipe.id === updatedRecipe.id ? { ...recipe, ...data } : recipe
+          recipe._id === updatedRecipe._id ? { ...recipe, ...data } : recipe
         )
       );
     } catch (error) {
@@ -79,7 +81,7 @@ export const RecipesProvider = ({ children }: RecipeProviderProps) => {
     try {
       await api.delete(`recipes/${recipeId}`);
       setRecipes((prevRecipes) =>
-        prevRecipes.filter((recipe) => recipe.id !== recipeId)
+        prevRecipes.filter((recipe) => recipe._id !== recipeId)
       );
     } catch (error) {
       console.error("Error deleting Recipe:", error);
@@ -94,13 +96,13 @@ export const RecipesProvider = ({ children }: RecipeProviderProps) => {
 
   const filterRecipes = (search: string, category: string): Recipe[] => {
     const normalizedSearch = search.toLowerCase();
-    const normalizedCategory = category.toLowerCase();
+    const normalizedCategory = category?.toLowerCase();
 
     return recipes.filter((recipe) => {
       const matchesCategory =
         normalizedCategory === "all" ||
         recipe.category.toLowerCase() === normalizedCategory;
-      const matchesSearch = recipe.title
+      const matchesSearch = recipe.name
         .toLowerCase()
         .includes(normalizedSearch);
       return matchesCategory && matchesSearch;

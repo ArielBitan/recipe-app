@@ -1,29 +1,28 @@
 import { useParams } from "react-router-dom";
-import { useRecipes } from "@/components/context/ThemeContext";
+import { useRecipes } from "@/components/context/RecipeContext";
 import { Navbar } from "@/components/Navbar";
 import ReactStars from "react-rating-stars-component";
 import RecipeBreadcrumb from "@/components/RecipeBreadcrumb";
 
 const RecipeDetails = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const { recipes } = useRecipes();
-
-  const recipe = recipes.find((recipe) => recipe.id === id);
+  const recipe = recipes.find((recipe) => recipe._id.toString() === _id);
 
   return (
     <>
       <Navbar />
       <div className="flex flex-col items-center justify-center mx-4">
-        <RecipeBreadcrumb name={recipe?.title} />
+        <RecipeBreadcrumb name={recipe?.name} />
         {recipe ? (
           <div className="flex flex-col items-center w-full">
             <h1 className="text-4xl font-bold text-center my-4">
-              {recipe.title}
+              {recipe.name}
             </h1>
             <div className="w-full h-96">
               <img
                 src={recipe.image}
-                alt={recipe.title}
+                alt={recipe.name}
                 className=" rounded-2xl w-full h-full object-cover"
               />
             </div>
@@ -37,7 +36,7 @@ const RecipeDetails = () => {
               />
             </div>
             <ul className="custom-list mt-4">
-              <h2 className="text-3xl mb-4 font-medium">{`${recipe.title} ingredients:`}</h2>
+              <h2 className="text-3xl mb-4 font-medium">{`${recipe.name} ingredients:`}</h2>
               {recipe.ingredients.map((ingredient, index) => (
                 <li className="font-thin text-2xl" key={index}>
                   {ingredient}

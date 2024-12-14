@@ -11,8 +11,9 @@ import { api } from "@/api";
 import { useEffect, useState } from "react";
 
 interface CarouselItemType {
-  title: string;
-  subtitle: string;
+  name: string;
+  _id: string;
+  description: string;
   image: string;
 }
 
@@ -21,7 +22,7 @@ export const ImageCarousel = () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get("hero");
+      const { data } = await api.get("recipes", { withCredentials: true });
       setCarouselItems(data);
     })();
   }, []);
@@ -35,7 +36,7 @@ export const ImageCarousel = () => {
       className="w-full max-w-4xl"
       plugins={[
         Autoplay({
-          delay: 3000,
+          delay: 5000,
         }),
       ]}
     >
@@ -44,8 +45,9 @@ export const ImageCarousel = () => {
           <CarouselItem key={index}>
             <Image
               image={item.image}
-              title={item.title}
-              subtitle={item.subtitle}
+              name={item.name}
+              _id={item._id}
+              subtitle={item.description}
             />
           </CarouselItem>
         ))}

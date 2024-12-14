@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connectToDatabase } from "./config/database";
 import userRouter from "./routes/userRoutes";
+import recipeRouter from "./routes/recipeRoutes";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(
 app.use(express.json());
 
 app.use("/user", userRouter);
+app.use("/recipes", recipeRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to TypeScript backend!");

@@ -1,5 +1,8 @@
 import jwt, { Secret, JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
+import * as cookie from "cookie";
+import dotenv from "dotenv";
+dotenv.config();
 
 const SECRET_KEY = process.env.JWT_SECRET;
 
@@ -13,16 +16,33 @@ export interface CustomRequest extends Request {
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.header("Authorization")?.replace("Bearer ", "");
+    const cookies = cookie.parse(req.headers.cookie as string);
+    const token = cookies.jwt;
 
     if (!token) {
-      throw new Error();
+      res
+        .status(401)
+        .json({ message: "Session expired. Please log in again." });
     }
 
-    const decoded = jwt.verify(token, SECRET_KEY as Secret);
-    (req as CustomRequest).token = decoded;
-    next();
+    try {
+      const decoded = jwt.verify(
+        token as string,
+        SECRET_KEY as Secret
+      ) as JwtPayload;
+      (req as CustomRequest).token = decoded;
+      console.log(decoded);
+      next();
+    } catch (error) {
+      if (error instanceof jwt.TokenExpiredError) {
+        res
+          .status(401)
+          .json({ message: "Token expired. Please log in again." });
+      }
+      res.status(401).json({ message: "Invalid token. Please log in again." });
+    }
   } catch (err) {
+    console.log(err);
     res.status(401).send("Please authenticate");
   }
 };

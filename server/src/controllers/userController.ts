@@ -4,8 +4,6 @@ import * as userServices from "../services/user.service";
 
 export const login = async (req: Request, res: Response) => {
   try {
-    const { username, password } = req.body;
-
     const foundUser = await userServices.login(req.body);
 
     if (!foundUser) {
@@ -17,9 +15,8 @@ export const login = async (req: Request, res: Response) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 3600000, // 1 hour
+        maxAge: 3600000,
       })
-
       .status(200)
       .json({
         message: `User ${foundUser.user.username} logged in successfully.`,
@@ -34,12 +31,22 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+export const validateToken = (req: Request, res: Response) => {
+  res.status(200).json({ message: "token is valid", user: req.headers.cookie });
+};
+
 export const register = async (req: Request, res: Response) => {
   try {
     await userServices.register(req.body);
-    res.status(200).send("Inserted successfully");
+    res.status(200).json({
+      message: "User registered successfully!",
+    });
   } catch (error) {
-    console.log(error);
-    getErrorMessage(error);
+    const errorMessage = getErrorMessage(error);
+    console.error(errorMessage);
+    res.status(400).json({
+      message: "Registration failed",
+      error: errorMessage,
+    });
   }
 };

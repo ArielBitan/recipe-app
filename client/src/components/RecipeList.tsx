@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { RecipeCard } from "./RecipeCard";
 import { useSearchParams } from "react-router-dom";
-import { Recipe } from "./context/ThemeContext";
-import { useRecipes } from "./context/ThemeContext";
+import { Recipe } from "./context/RecipeContext";
+import { useRecipes } from "./context/RecipeContext";
 
 const RecipeList = () => {
   const { recipes, fetchRecipes, filterRecipes } = useRecipes();
@@ -25,9 +25,9 @@ const RecipeList = () => {
       {filteredRecipes.length > 0 ? (
         filteredRecipes.map((recipe) => (
           <RecipeCard
-            key={recipe.id}
-            recipeId={recipe.id}
-            title={recipe.title}
+            key={recipe._id}
+            _id={recipe._id}
+            name={recipe.name}
             image={recipe.image}
           />
         ))
