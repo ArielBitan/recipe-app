@@ -5,6 +5,7 @@ import Recipe from "../models/Recipe";
 export const injectData = async () => {
   try {
     console.log("injecting data");
+    const categories = ["Breakfast", "Lunch", "Dinner", "Desert"];
     const users = await User.insertMany(
       await Promise.all(
         Array.from({ length: 10 }).map(async () => {
@@ -12,7 +13,7 @@ export const injectData = async () => {
             email: faker.internet.email(),
             password: faker.internet.password({ length: 6 }),
             username: faker.internet.username().substring(0, 8),
-            profilePic: faker.image.url({ width: 500, height: 500 }),
+            profilePic: faker.image.url({ width: 1000, height: 1000 }),
             recipes: [],
           };
         })
@@ -23,16 +24,13 @@ export const injectData = async () => {
         return {
           name: faker.food.dish(),
           description: faker.food.description(),
-          image: faker.image.urlLoremFlickr({
-            width: 800,
-            height: 500,
-            category: "food",
-          }),
+          image: faker.image.url({ width: 500, height: 500 }),
           ingredients: Array.from({ length: 5 }).map(() =>
             faker.food.ingredient()
           ),
           instructions: faker.lorem.paragraph(5),
           user: faker.helpers.arrayElement(users)._id,
+          category: faker.helpers.arrayElement(categories),
         };
       })
     );

@@ -21,7 +21,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ name, image, _id }) => {
       <Card className="flex flex-col items-center text-left motion-preset-expand hover:-translate-y-4">
         <CardHeader className="w-full flex flex-col items-center">
           <CardDescription>
-            <div className="w-80">
+            <div>
               <img
                 src={image}
                 alt="image"
