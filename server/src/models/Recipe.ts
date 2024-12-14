@@ -15,6 +15,16 @@ const recipeSchema = new mongoose.Schema(
       required: false,
       default: "https://loremflickr.com/800/400?lock=8792450353592873",
     },
+    ingredients: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
+    instructions: {
+      type: String,
+      required: true,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

@@ -1,6 +1,17 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
+import bcrypt from "bcrypt";
 
-const userSchema = new mongoose.Schema(
+const saltRounds = 10;
+
+export interface I_UserDocument extends Document {
+  username: string;
+  password: string;
+  email?: string;
+  profilePic?: string;
+  recipes?: mongoose.Schema.Types.ObjectId[];
+}
+
+const userSchema: mongoose.Schema<I_UserDocument> = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -15,7 +26,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: false,
-      unique: true,
+      default: undefined,
     },
     profilePic: {
       type: String,
@@ -24,7 +35,7 @@ const userSchema = new mongoose.Schema(
     },
     recipes: [
       {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Recipe",
         required: false,
       },
@@ -36,4 +47,14 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("User", userSchema);
+userSchema.pre("save", async function (next) {
+  const user = this;
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, saltRounds);
+  }
+  next();
+});
+
+const User = mongoose.model<I_UserDocument>("User", userSchema);
+
+export default User;
