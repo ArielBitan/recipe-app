@@ -44,7 +44,9 @@ const RecipeDetails = () => {
               ))}
             </ul>
             <h2 className="my-4 text-3xl font-medium">Instructions:</h2>
-            <p className="text-2xl font-thin mb-40">{recipe.instructions}</p>
+            <p className="text-2xl font-thin mb-40 mx-32 ">
+              {recipe.instructions}
+            </p>
           </div>
         ) : (
           <p className="text-xl font-semibold">Recipe not found.</p>

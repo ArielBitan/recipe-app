@@ -1,0 +1,8 @@
+add logged user management using redux
+set up profile page
+add recipe functionality
+limit and offset on recipes data
+rating functionality
+delete recipe functionality
+edit recipe functionality
+cloudinary

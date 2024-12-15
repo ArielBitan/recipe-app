@@ -19,7 +19,9 @@ export const login = async (req: Request, res: Response) => {
       })
       .status(200)
       .json({
-        message: `User ${foundUser.user.username} logged in successfully.`,
+        username: foundUser.user.username,
+        email: foundUser.user.email,
+        profilePic: foundUser.user.profilePic,
       });
   } catch (error) {
     const errorMessage = getErrorMessage(error);

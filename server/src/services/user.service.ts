@@ -30,7 +30,12 @@ export async function login(user: I_UserDocument) {
       );
 
       return {
-        user: { _id: foundUser._id, username: foundUser.username },
+        user: {
+          _id: foundUser._id,
+          username: foundUser.username,
+          email: foundUser.email,
+          profilePic: foundUser.profilePic,
+        },
         token,
       };
     } else {

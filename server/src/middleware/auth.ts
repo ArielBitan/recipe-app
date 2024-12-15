@@ -31,7 +31,6 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
         SECRET_KEY as Secret
       ) as JwtPayload;
       (req as CustomRequest).token = decoded;
-      console.log(decoded);
       next();
     } catch (error) {
       if (error instanceof jwt.TokenExpiredError) {
