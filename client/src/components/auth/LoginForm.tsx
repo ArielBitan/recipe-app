@@ -13,16 +13,19 @@ import {
 
 import { api } from "@/api";
 import axios from "axios";
+import { useToast } from "@/hooks/use-toast";
 
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/store/user/hooks";
 import { setLoggedUser } from "@/store/user/userSlice";
 
 const LoginForm = () => {
+  const { toast } = useToast();
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const handleLoginSubmit = async () => {
     if (!loginData.username || !loginData.password) {
       setError("Please fill in both username and password.");
@@ -34,8 +37,12 @@ const LoginForm = () => {
         withCredentials: true,
       });
       console.log(response.data);
-      const { username, email, profilePic } = response.data;
-      dispatch(setLoggedUser({ username, email, profilePic }));
+      const { _id, username, email, profilePic } = response.data;
+      dispatch(setLoggedUser({ _id, username, email, profilePic }));
+      toast({
+        title: "Logged in successfully",
+        description: `Welcome back ${username}!`,
+      });
       navigate("/");
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

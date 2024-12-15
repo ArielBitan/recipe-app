@@ -53,7 +53,19 @@ const recipeSchema = new mongoose.Schema(
   {
     timestamps: { createdAt: true, updatedAt: false },
     versionKey: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+recipeSchema.virtual("averageRating").get(function () {
+  if (this.ratings.length === 0) return 0;
+  const total = this.ratings.reduce((acc, rating) => acc + rating.rating, 0);
+  return total / this.ratings.length;
+});
+
+recipeSchema.virtual("ratingsAmount").get(function () {
+  return this.ratings.length;
+});
 
 export default mongoose.model("Recipe", recipeSchema);

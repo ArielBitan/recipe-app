@@ -13,8 +13,10 @@ import {
 import { api } from "@/api";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useToast } from "@/hooks/use-toast";
 
 const SignUpForm = () => {
+  const { toast } = useToast();
   const [signUpData, setSignUpData] = useState({
     email: "",
     username: "",
@@ -26,7 +28,10 @@ const SignUpForm = () => {
   const handleSignUpSubmit = async () => {
     try {
       await api.post("/user/register", signUpData);
-      setError("Successfully created user");
+      toast({
+        title: "Signed in successfully",
+        description: `Please log in`,
+      });
       navigate("/login");
     } catch (error) {
       if (axios.isAxiosError(error)) {

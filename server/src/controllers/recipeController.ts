@@ -19,10 +19,8 @@ export const createRecipe = async (req: Request, res: Response) => {
 // Get all recipes
 export const getAllRecipes = async (req: Request, res: Response) => {
   try {
-    console.log(req.query);
     const limit = parseInt(req.query.limit as string) || 16;
     const offset = parseInt(req.query.offset as string) || 0;
-    console.log(limit);
     const recipes = await Recipe.find()
       .skip(offset)
       .limit(limit)
@@ -42,9 +40,6 @@ export const getAllRecipes = async (req: Request, res: Response) => {
 export const getRecipeById = async (req: Request, res: Response) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
-    if (!recipe) {
-      res.status(404).json({ message: "Recipe not found" });
-    }
     res.status(200).json(recipe);
   } catch (error) {
     res.status(400).json({

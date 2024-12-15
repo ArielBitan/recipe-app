@@ -25,6 +25,7 @@ import { useAppDispatch } from "@/store/user/hooks";
 import { setLoggedUser } from "@/store/user/userSlice";
 
 interface DecodedToken {
+  _id: string;
   username: string;
   email: string;
   profilePic: string;
@@ -71,8 +72,15 @@ const Navbar = () => {
           const token = response.data.user;
           if (token) {
             const decodedToken = jwtDecode<DecodedToken>(token);
-            const { username, email, profilePic } = decodedToken;
-            dispatch(setLoggedUser({ username, email, profilePic }));
+            const { _id, username, email, profilePic } = decodedToken;
+            dispatch(
+              setLoggedUser({
+                _id: _id.toString(),
+                username,
+                email,
+                profilePic,
+              })
+            );
           } else {
             console.log("No token in response data");
           }
@@ -86,7 +94,6 @@ const Navbar = () => {
 
     validateToken();
   }, []);
-
   return (
     <NavigationMenu className="mb-6 font-primary">
       <NavigationMenuLink

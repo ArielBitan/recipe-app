@@ -13,9 +13,17 @@ interface RecipeCardProps {
   name: string;
   image: string;
   _id: string;
+  avgRating?: number;
+  ratingsAmount?: number;
 }
 
-export const RecipeCard: React.FC<RecipeCardProps> = ({ name, image, _id }) => {
+export const RecipeCard: React.FC<RecipeCardProps> = ({
+  name,
+  image,
+  _id,
+  avgRating,
+  ratingsAmount,
+}) => {
   return (
     <Link to={`/recipes/${_id}`}>
       <Card className="flex flex-col items-center text-left motion-preset-expand hover:-translate-y-4">
@@ -35,11 +43,13 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ name, image, _id }) => {
           <ReactStars
             count={5}
             size={25}
-            value={3}
+            value={avgRating}
             activeColor="#ffd700"
             edit={false}
           />
-          <span className="font-light font-primary mt-1">300 Ratings</span>
+          <span className="font-light font-primary mt-1">
+            {ratingsAmount} Ratings
+          </span>
         </CardFooter>
       </Card>
     </Link>

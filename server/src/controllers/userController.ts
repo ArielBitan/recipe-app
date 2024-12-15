@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { getErrorMessage } from "../utils/errors.util";
 import * as userServices from "../services/user.service";
+import Recipe from "../models/Recipe";
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -19,6 +20,7 @@ export const login = async (req: Request, res: Response) => {
       })
       .status(200)
       .json({
+        _id: foundUser.user._id,
         username: foundUser.user.username,
         email: foundUser.user.email,
         profilePic: foundUser.user.profilePic,
@@ -50,5 +52,15 @@ export const register = async (req: Request, res: Response) => {
       message: "Registration failed",
       error: errorMessage,
     });
+  }
+};
+
+export const getUserRecipes = async (req: Request, res: Response) => {
+  try {
+    const _id = req.user?._id;
+    const userRecipes = await Recipe.find({ user: _id });
+    res.status(200).json(userRecipes);
+  } catch (error) {
+    res.status(400).json({ message: "Error getting user posts", error });
   }
 };

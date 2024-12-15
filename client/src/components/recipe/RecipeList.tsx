@@ -33,6 +33,8 @@ const RecipeList: React.FC<RecipeListProps> = ({ limit }) => {
             _id={recipe._id}
             name={recipe.title}
             image={recipe.image}
+            avgRating={recipe.averageRating}
+            ratingsAmount={recipe.ratingsAmount}
           />
         ))
       ) : (
