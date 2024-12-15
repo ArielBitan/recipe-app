@@ -14,21 +14,19 @@ import { api } from "@/api";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-interface SignUpFormProps {
-  setError: (error: string) => void;
-}
-
-const SignUpForm: React.FC<SignUpFormProps> = ({ setError }) => {
+const SignUpForm = () => {
   const [signUpData, setSignUpData] = useState({
     email: "",
     username: "",
     password: "",
   });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSignUpSubmit = async () => {
     try {
       await api.post("/user/register", signUpData);
+      setError("Successfully created user");
       navigate("/login");
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -84,6 +82,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ setError }) => {
           />
         </div>
       </CardContent>
+      <div className="text-red-600 pb-4">{error}</div>
       <CardFooter>
         <Button onClick={handleSignUpSubmit}>Sign Up</Button>
       </CardFooter>

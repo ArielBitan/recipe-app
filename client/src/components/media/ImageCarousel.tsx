@@ -11,7 +11,7 @@ import { api } from "@/api";
 import { useEffect, useState } from "react";
 
 interface CarouselItemType {
-  name: string;
+  title: string;
   _id: string;
   description: string;
   image: string;
@@ -45,9 +45,9 @@ export const ImageCarousel = () => {
           <CarouselItem key={index}>
             <Image
               image={item.image}
-              name={item.name}
+              name={item.title}
               _id={item._id}
-              subtitle={item.description}
+              description={item.description}
             />
           </CarouselItem>
         ))}

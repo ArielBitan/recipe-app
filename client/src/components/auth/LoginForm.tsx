@@ -18,12 +18,9 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/store/user/hooks";
 import { setLoggedUser } from "@/store/user/userSlice";
 
-interface LoginFormProps {
-  setError: (error: string) => void;
-}
-
-const LoginForm: React.FC<LoginFormProps> = ({ setError }) => {
+const LoginForm = () => {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const handleLoginSubmit = async () => {
@@ -82,6 +79,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ setError }) => {
           />
         </div>
       </CardContent>
+      <div className="text-red-600 pb-4">{error}</div>
       <CardFooter>
         <Button onClick={handleLoginSubmit}>Login</Button>
       </CardFooter>

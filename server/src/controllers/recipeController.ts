@@ -3,31 +3,9 @@ import { getErrorMessage } from "../utils/errors.util";
 
 import Recipe from "../models/Recipe";
 
-// Create a new recipe
 export const createRecipe = async (req: Request, res: Response) => {
   try {
-    if (
-      !req.body.name ||
-      !req.body.description ||
-      !req.body.ingredients ||
-      !req.body.instructions ||
-      !req.body.user
-    ) {
-      res.status(400).json({
-        message: "Validation failed. Required fields are missing.",
-      });
-    }
-
-    if (
-      !Array.isArray(req.body.ingredients) ||
-      req.body.ingredients.length === 0
-    ) {
-      res.status(400).json({
-        message: "Validation failed. Ingredients must be a non-empty array.",
-      });
-    }
-
-    const newRecipe = await Recipe.create(req.body);
+    const newRecipe = await Recipe.create({ ...req.body, user: req.user?._id });
 
     res.status(201).json(newRecipe);
   } catch (error) {
@@ -37,10 +15,14 @@ export const createRecipe = async (req: Request, res: Response) => {
     });
   }
 };
+
 // Get all recipes
 export const getAllRecipes = async (req: Request, res: Response) => {
   try {
-    const recipes = await Recipe.find().populate("user", "username");
+    const recipes = await Recipe.find()
+      .sort({ createdAt: -1 }) // Sort by date in descending order (newer first)
+      .exec();
+
     res.status(200).json(recipes);
   } catch (error) {
     res.status(400).json({
@@ -53,10 +35,7 @@ export const getAllRecipes = async (req: Request, res: Response) => {
 // Get a single recipe by ID
 export const getRecipeById = async (req: Request, res: Response) => {
   try {
-    const recipe = await Recipe.findById(req.params.id).populate(
-      "user",
-      "username"
-    );
+    const recipe = await Recipe.findById(req.params.id);
     if (!recipe) {
       res.status(404).json({ message: "Recipe not found" });
     }

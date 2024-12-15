@@ -27,7 +27,7 @@ const RecipeList = () => {
           <RecipeCard
             key={recipe._id}
             _id={recipe._id}
-            name={recipe.name}
+            name={recipe.title}
             image={recipe.image}
           />
         ))

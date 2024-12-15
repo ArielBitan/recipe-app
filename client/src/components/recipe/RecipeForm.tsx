@@ -14,16 +14,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { api } from "@/api";
+import { useNavigate } from "react-router-dom";
 
 const newRecipeSchema = z.object({
   title: z.string().min(3).max(30),
   image: z.string().url(),
+  description: z.string().min(10),
   ingredients: z.array(z.string()).min(1),
   instructions: z.string().min(10),
   category: z.string().min(3).max(20),
 });
 
 export function RecipeForm() {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof newRecipeSchema>>({
     resolver: zodResolver(newRecipeSchema),
     defaultValues: {
@@ -46,12 +49,12 @@ export function RecipeForm() {
     const { data } = await api.post("/recipes", values, {
       withCredentials: true,
     });
-    console.log(data);
+    navigate(`/recipes/${data._id}`);
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
         <FormField
           control={form.control}
           name="title"
@@ -62,6 +65,21 @@ export function RecipeForm() {
                 <Input placeholder="Enter recipe title" {...field} />
               </FormControl>
               <FormDescription>Title of your recipe</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter recipe description" {...field} />
+              </FormControl>
+              <FormDescription>Description of your recipe</FormDescription>
               <FormMessage />
             </FormItem>
           )}

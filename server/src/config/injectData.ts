@@ -22,7 +22,7 @@ export const injectData = async () => {
     const recipes = await Recipe.insertMany(
       Array.from({ length: 50 }).map(() => {
         return {
-          name: faker.food.dish(),
+          title: faker.food.dish(),
           description: faker.food.description(),
           image: faker.image.url({ width: 500, height: 500 }),
           ingredients: Array.from({ length: 5 }).map(() =>

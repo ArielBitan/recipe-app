@@ -24,7 +24,12 @@ export async function login(user: I_UserDocument) {
 
     if (isMatch) {
       const token = jwt.sign(
-        { _id: foundUser._id?.toString(), username: foundUser.username },
+        {
+          _id: foundUser._id?.toString(),
+          username: foundUser.username,
+          email: foundUser.email,
+          profilePic: foundUser.profilePic,
+        },
         process.env.JWT_SECRET as Secret,
         { expiresIn: "2 days" }
       );

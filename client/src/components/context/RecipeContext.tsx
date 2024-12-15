@@ -87,14 +87,14 @@ export const RecipesProvider = ({ children }: RecipeProviderProps) => {
   };
 
   const filterRecipes = (search: string, category: string): Recipe[] => {
-    const normalizedSearch = search.toLowerCase();
+    const normalizedSearch = search?.toLowerCase();
     const normalizedCategory = category?.toLowerCase();
 
     return recipes.filter((recipe) => {
       const matchesCategory =
         normalizedCategory === "all" ||
         recipe.category.toLowerCase() === normalizedCategory;
-      const matchesSearch = recipe.name
+      const matchesSearch = recipe.title
         .toLowerCase()
         .includes(normalizedSearch);
       return matchesCategory && matchesSearch;

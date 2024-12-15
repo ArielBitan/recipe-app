@@ -13,13 +13,13 @@ const AddRecipe = () => {
   return (
     <Dialog>
       <DialogTrigger>Add Recipe</DialogTrigger>
-      <DialogContent className="max-w-2xl">
-        <DialogHeader className=" flex items-center gap-4">
+      <DialogContent className="max-w-3xl">
+        <DialogHeader className="flex items-center gap-4">
           <DialogTitle className="text-2xl">Add Recipe</DialogTitle>
-          <DialogDescription>
-            <RecipeForm />
-          </DialogDescription>
         </DialogHeader>
+        <DialogDescription>
+          <RecipeForm />
+        </DialogDescription>
       </DialogContent>
     </Dialog>
   );

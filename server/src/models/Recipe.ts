@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const recipeSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
     },
     description: {
       type: String,
-      required: true,
+      required: false,
     },
     image: {
       type: String,

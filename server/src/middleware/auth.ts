@@ -2,6 +2,7 @@ import jwt, { Secret, JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import * as cookie from "cookie";
 import dotenv from "dotenv";
+import { IUserWithoutPassword } from "../../types/custom";
 dotenv.config();
 
 const SECRET_KEY = process.env.JWT_SECRET;
@@ -11,7 +12,7 @@ if (!SECRET_KEY) {
 }
 
 export interface CustomRequest extends Request {
-  token: string | JwtPayload;
+  token: string | IUserWithoutPassword;
 }
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
@@ -29,8 +30,8 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
       const decoded = jwt.verify(
         token as string,
         SECRET_KEY as Secret
-      ) as JwtPayload;
-      (req as CustomRequest).token = decoded;
+      ) as IUserWithoutPassword;
+      req.user = decoded;
       next();
     } catch (error) {
       if (error instanceof jwt.TokenExpiredError) {
