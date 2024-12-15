@@ -1,31 +1,11 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Navbar } from "@/components/Navbar";
-import LoginForm from "@/components/LoginForm";
-import SignUpForm from "@/components/SignUpForm";
-import { api } from "@/api";
-import { useNavigate } from "react-router-dom";
+import Navbar from "@/components/layout/Navbar";
+import LoginForm from "@/components/auth/LoginForm";
+import SignUpForm from "@/components/auth/SignUpForm";
 
 const LoginPage = () => {
   const [incorrectUser, setIncorrectUser] = useState("");
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const checkAuth = async () => {
-  //     try {
-  //       const response = await api.get("/user/validate-token", {
-  //         withCredentials: true,
-  //       });
-  //       if (response.status === 200) {
-  //         navigate("/");
-  //       }
-  //     } catch (error) {
-  //       console.log("User is not logged in or session expired.");
-  //     }
-  //   };
-  //   checkAuth();
-  // }, [navigate]);
-
   return (
     <>
       <Navbar />

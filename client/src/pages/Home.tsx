@@ -1,6 +1,6 @@
-import { ImageCarousel } from "@/components/ImageCarousel";
-import { Navbar } from "@/components/Navbar";
-import RecipeList from "@/components/RecipeList";
+import { ImageCarousel } from "@/components/media/ImageCarousel";
+import Navbar from "@/components/layout/Navbar";
+import RecipeList from "@/components/recipe/RecipeList";
 
 const Home = () => {
   return (

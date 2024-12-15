@@ -1,8 +1,8 @@
-import RecipeList from "@/components/RecipeList";
-import { Navbar } from "@/components/Navbar";
-import { SearchField } from "@/components/SearchField";
-import AddRecipe from "@/components/AddRecipe";
-import RecipeFilter from "@/components/RecipeFilter";
+import RecipeList from "@/components/recipe/RecipeList";
+import Navbar from "@/components/layout/Navbar";
+import { SearchField } from "@/components/search/SearchField";
+import AddRecipe from "@/components/recipe/AddRecipe";
+import RecipeFilter from "@/components/recipe/RecipeFilter";
 
 const Recipes = () => {
   return (

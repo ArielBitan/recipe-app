@@ -1,14 +1,6 @@
 import React, { createContext, useContext, useState, useMemo } from "react";
 import { api } from "@/api";
-
-export interface Recipe {
-  _id: string;
-  name: string;
-  image: string;
-  ingredients: string[];
-  instructions: string;
-  category: string;
-}
+import { Recipe } from "@/types";
 
 interface RecipesContextType {
   recipes: Recipe[];

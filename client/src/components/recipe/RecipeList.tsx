@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { RecipeCard } from "./RecipeCard";
 import { useSearchParams } from "react-router-dom";
-import { Recipe } from "./context/RecipeContext";
-import { useRecipes } from "./context/RecipeContext";
+import { Recipe } from "@/types";
+import { useRecipes } from "../context/RecipeContext";
 
 const RecipeList = () => {
   const { recipes, fetchRecipes, filterRecipes } = useRecipes();

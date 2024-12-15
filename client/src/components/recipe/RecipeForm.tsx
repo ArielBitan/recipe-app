@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,13 +12,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea"; // Assuming you use a Textarea component for longer inputs
+import { Textarea } from "@/components/ui/textarea";
 
-// Schema definition for the new recipe form
 const newRecipeSchema = z.object({
   title: z.string().min(3).max(30),
   image: z.string().url(),
-  ingredients: z.array(z.string()).min(1),
+  ingredients: z.array(z.string()).min(1), // Ensure it's an array of strings
   instructions: z.string().min(10),
   category: z.string().min(3).max(20),
 });
@@ -27,11 +25,25 @@ const newRecipeSchema = z.object({
 export function RecipeForm() {
   const form = useForm<z.infer<typeof newRecipeSchema>>({
     resolver: zodResolver(newRecipeSchema),
+    defaultValues: {
+      ingredients: [], // Set default value for ingredients to an empty array
+    },
   });
 
+  const { setValue } = form;
+
+  // Handle change in ingredients input (split comma-separated values)
+  const handleIngredientsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Split by commas and remove empty values
+    const ingredients = value
+      .split(",")
+      .map((ingredient) => ingredient.trim())
+      .filter(Boolean);
+    setValue("ingredients", ingredients); // Update the ingredients field in form
+  };
+
   function onSubmit(values: z.infer<typeof newRecipeSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
 
@@ -77,9 +89,9 @@ export function RecipeForm() {
             <FormItem>
               <FormLabel>Ingredients</FormLabel>
               <FormControl>
-                <Textarea
+                <Input
                   placeholder="Enter ingredients, separated by commas"
-                  {...field}
+                  onChange={handleIngredientsChange}
                 />
               </FormControl>
               <FormDescription>List your recipe ingredients</FormDescription>
