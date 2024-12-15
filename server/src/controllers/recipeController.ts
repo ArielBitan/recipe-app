@@ -19,8 +19,13 @@ export const createRecipe = async (req: Request, res: Response) => {
 // Get all recipes
 export const getAllRecipes = async (req: Request, res: Response) => {
   try {
+    const limit = parseInt(req.query.limit as string) || 16;
+    const offset = parseInt(req.query.offset as string) || 0;
+
     const recipes = await Recipe.find()
-      .sort({ createdAt: -1 }) // Sort by date in descending order (newer first)
+      .skip(offset)
+      .limit(limit)
+      .sort({ createdAt: -1 })
       .exec();
 
     res.status(200).json(recipes);

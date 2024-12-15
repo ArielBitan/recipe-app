@@ -23,10 +23,10 @@ export const RecipesProvider = ({ children }: RecipeProviderProps) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const fetchRecipes = async () => {
+  const fetchRecipes = async (limit?: Number) => {
     setIsLoading(true);
     try {
-      const { data } = await api.get<Recipe[]>("/recipes", {
+      const { data } = await api.get<Recipe[]>(`/recipes?limit=${limit}`, {
         withCredentials: true,
       });
       setRecipes(data);
