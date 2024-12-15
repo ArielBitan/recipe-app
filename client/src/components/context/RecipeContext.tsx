@@ -7,7 +7,7 @@ interface RecipesContextType {
   addRecipe: (newRecipe: Recipe) => Promise<void>;
   updateRecipe: (updatedRecipe: Recipe) => Promise<void>;
   deleteRecipe: (recipeId: string) => Promise<void>;
-  fetchRecipes: () => Promise<void>;
+  fetchRecipes: (limit?: number) => Promise<void>;
   setContextRecipes: (contextRecipes: Recipe[]) => void;
   filterRecipes: (search: string, category: string) => Recipe[];
   isLoading: boolean;
@@ -23,7 +23,7 @@ export const RecipesProvider = ({ children }: RecipeProviderProps) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const fetchRecipes = async (limit?: Number) => {
+  const fetchRecipes = async (limit?: number) => {
     setIsLoading(true);
     try {
       const { data } = await api.get<Recipe[]>(`/recipes?limit=${limit}`, {

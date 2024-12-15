@@ -19,9 +19,10 @@ export const createRecipe = async (req: Request, res: Response) => {
 // Get all recipes
 export const getAllRecipes = async (req: Request, res: Response) => {
   try {
+    console.log(req.query);
     const limit = parseInt(req.query.limit as string) || 16;
     const offset = parseInt(req.query.offset as string) || 0;
-
+    console.log(limit);
     const recipes = await Recipe.find()
       .skip(offset)
       .limit(limit)

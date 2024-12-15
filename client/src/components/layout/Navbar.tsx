@@ -18,6 +18,17 @@ import { useAppSelector } from "@/store/user/hooks";
 import { isLoggedUser, selectUser } from "@/store/user/userSlice";
 import { Avatar } from "@radix-ui/react-avatar";
 import { AvatarImage, AvatarFallback } from "../ui/avatar";
+import { useEffect } from "react";
+import { api } from "@/api";
+import { jwtDecode } from "jwt-decode";
+import { useAppDispatch } from "@/store/user/hooks";
+import { setLoggedUser } from "@/store/user/userSlice";
+
+interface DecodedToken {
+  username: string;
+  email: string;
+  profilePic: string;
+}
 
 const UserMenu = ({ user }: { user: any }) => (
   <DropdownMenu>
@@ -48,6 +59,33 @@ const UserMenu = ({ user }: { user: any }) => (
 const Navbar = () => {
   const isLoggedIn = useAppSelector(isLoggedUser);
   const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const validateToken = async () => {
+      try {
+        const response = await api.get("/user/validate-token", {
+          withCredentials: true,
+        });
+        if (response.status === 200) {
+          const token = response.data.user;
+          if (token) {
+            const decodedToken = jwtDecode<DecodedToken>(token);
+            const { username, email, profilePic } = decodedToken;
+            dispatch(setLoggedUser({ username, email, profilePic }));
+          } else {
+            console.log("No token in response data");
+          }
+        } else {
+          console.log("Invalid token or response not 200", response.status);
+        }
+      } catch (error) {
+        console.error("Error validating token:", error);
+      }
+    };
+
+    validateToken();
+  }, []);
 
   return (
     <NavigationMenu className="mb-6 font-primary">

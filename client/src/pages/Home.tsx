@@ -1,6 +1,8 @@
 import { ImageCarousel } from "@/components/media/ImageCarousel";
 import Navbar from "@/components/layout/Navbar";
 import RecipeList from "@/components/recipe/RecipeList";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const Home = () => {
   return (
@@ -18,8 +20,15 @@ const Home = () => {
         </p>
       </section>
       <section className="mb-8">
-        <RecipeList />
+        <RecipeList limit={8} />
       </section>
+      <Link
+        className="p-4 text-2xl flex items-center gap-4 hover:underline"
+        to={"/recipes"}
+      >
+        View more recipes
+        <ArrowRight className="mt-2" />
+      </Link>
     </div>
   );
 };

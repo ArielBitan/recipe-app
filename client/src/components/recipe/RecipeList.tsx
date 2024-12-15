@@ -4,13 +4,17 @@ import { useSearchParams } from "react-router-dom";
 import { Recipe } from "@/types";
 import { useRecipes } from "../context/RecipeContext";
 
-const RecipeList = () => {
+interface RecipeListProps {
+  limit?: number;
+}
+
+const RecipeList: React.FC<RecipeListProps> = ({ limit }) => {
   const { recipes, fetchRecipes, filterRecipes } = useRecipes();
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    fetchRecipes();
+    fetchRecipes(limit as number);
   }, []);
 
   useEffect(() => {
