@@ -13,11 +13,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { api } from "@/api";
 
 const newRecipeSchema = z.object({
   title: z.string().min(3).max(30),
   image: z.string().url(),
-  ingredients: z.array(z.string()).min(1), // Ensure it's an array of strings
+  ingredients: z.array(z.string()).min(1),
   instructions: z.string().min(10),
   category: z.string().min(3).max(20),
 });
@@ -26,25 +27,26 @@ export function RecipeForm() {
   const form = useForm<z.infer<typeof newRecipeSchema>>({
     resolver: zodResolver(newRecipeSchema),
     defaultValues: {
-      ingredients: [], // Set default value for ingredients to an empty array
+      ingredients: [],
     },
   });
 
   const { setValue } = form;
 
-  // Handle change in ingredients input (split comma-separated values)
   const handleIngredientsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // Split by commas and remove empty values
     const ingredients = value
       .split(",")
       .map((ingredient) => ingredient.trim())
       .filter(Boolean);
-    setValue("ingredients", ingredients); // Update the ingredients field in form
+    setValue("ingredients", ingredients);
   };
 
-  function onSubmit(values: z.infer<typeof newRecipeSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof newRecipeSchema>) {
+    const { data } = await api.post("/recipes", values, {
+      withCredentials: true,
+    });
+    console.log(data);
   }
 
   return (
@@ -95,6 +97,17 @@ export function RecipeForm() {
                 />
               </FormControl>
               <FormDescription>List your recipe ingredients</FormDescription>
+              <div className="grid grid-cols-2 gap-2 mt-2">
+                {form.getValues("ingredients").map((ingredient, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-100 p-2 rounded-lg shadow-sm"
+                    style={{ wordWrap: "break-word" }}
+                  >
+                    {ingredient}
+                  </div>
+                ))}
+              </div>
               <FormMessage />
             </FormItem>
           )}
