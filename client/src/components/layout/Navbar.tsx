@@ -22,7 +22,9 @@ import { useEffect } from "react";
 import { api } from "@/api";
 import { jwtDecode } from "jwt-decode";
 import { useAppDispatch } from "@/store/user/hooks";
-import { setLoggedUser } from "@/store/user/userSlice";
+import { setLoggedUser, logoutUser } from "@/store/user/userSlice";
+import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface DecodedToken {
   _id: string;
@@ -31,37 +33,53 @@ interface DecodedToken {
   profilePic: string;
 }
 
-const UserMenu = ({ user }: { user: any }) => (
-  <DropdownMenu>
-    <DropdownMenuTrigger>
-      <Avatar className="cursor-pointer mt-4">
-        <AvatarImage
-          className="rounded-full w-10 h-10"
-          src={user.profilePic}
-          alt="user-avatar"
-        />
-        <AvatarFallback className="rounded-full">CN</AvatarFallback>
-      </Avatar>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent className="mr-1">
-      <DropdownMenuLabel>My Account</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        <Link to="/profile">Profile</Link>
-      </DropdownMenuItem>
-      <DropdownMenuItem>
-        <LogOut />
-        <span>Log out</span>
-      </DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+const UserMenu = ({ user }: { user: any }) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const isLoggedIn = useAppSelector(isLoggedUser);
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    const response = await api.get("/user/logout", { withCredentials: true });
+    toast({
+      title: "Logged out successfully",
+      description: response.data.message,
+    });
+    dispatch(logoutUser());
+    console.log(isLoggedIn);
+    navigate("/login");
+  };
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Avatar className="cursor-pointer mt-4">
+          <AvatarImage
+            className="rounded-full w-10 h-10"
+            src={user.profilePic}
+            alt="user-avatar"
+          />
+          <AvatarFallback className="rounded-full">CN</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="mr-1">
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Link to="/profile">Profile</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogout}>
+          <LogOut />
+          <span>Log out</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const Navbar = () => {
-  const isLoggedIn = useAppSelector(isLoggedUser);
   const user = useAppSelector(selectUser);
+  const isLoggedIn = useAppSelector(isLoggedUser);
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     const validateToken = async () => {
       try {
@@ -93,7 +111,8 @@ const Navbar = () => {
     };
 
     validateToken();
-  }, []);
+  }, [user]);
+
   return (
     <NavigationMenu className="mb-6 font-primary">
       <NavigationMenuLink

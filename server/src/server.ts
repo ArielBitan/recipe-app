@@ -35,3 +35,21 @@ connectToDatabase(process.env.MONGO_URI || " ")
   .catch((error) => {
     console.error("Failed to start server:", error);
   });
+
+app.get("/set-cookie", (req, res) => {
+  res.cookie("test", "test", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+  });
+  res.send("Cookie Set");
+});
+
+app.get("/clear-cookie", (req, res) => {
+  res.clearCookie("test", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+  });
+  res.send("Cookie Cleared");
+});

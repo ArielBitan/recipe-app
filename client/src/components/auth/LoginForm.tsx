@@ -36,7 +36,6 @@ const LoginForm = () => {
       const response = await api.post("/user/login", loginData, {
         withCredentials: true,
       });
-      console.log(response.data);
       const { _id, username, email, profilePic } = response.data;
       dispatch(setLoggedUser({ _id, username, email, profilePic }));
       toast({
@@ -58,7 +57,7 @@ const LoginForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="p-4">Welcome back!</CardTitle>
+        <CardTitle className="p-4">Welcome ! </CardTitle>
         <CardDescription className="p-4">
           Please enter your username and password
         </CardDescription>

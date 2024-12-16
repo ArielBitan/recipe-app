@@ -23,7 +23,7 @@ const RecipeDetails = () => {
   const { recipes } = useRecipes();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [isRecipeAuthor, setIsRecipeAuthor] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true); // Add loading state
+  const [loading, setLoading] = useState<boolean>(true);
   const user = useAppSelector(selectUser);
   const { toast } = useToast();
 

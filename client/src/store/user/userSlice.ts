@@ -27,12 +27,18 @@ export const userSlice = createSlice({
       state.email = action.payload.email;
       state.profilePic = action.payload.profilePic;
     },
+    logoutUser: (state) => {
+      state._id = "";
+      state.username = "";
+      state.email = "";
+      state.profilePic = "";
+    },
   },
 });
 
-export const { setLoggedUser } = userSlice.actions;
+export const { setLoggedUser, logoutUser } = userSlice.actions;
 
-export const isLoggedUser = (state: RootState) => !!state.user.username;
+export const isLoggedUser = (state: RootState) => !!state.user._id;
 export const selectUser = (state: RootState) => state.user;
 
 export default userSlice.reducer;

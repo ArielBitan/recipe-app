@@ -11,26 +11,44 @@ export const login = async (req: Request, res: Response) => {
       throw new Error("Login failed: No user found.");
     }
 
-    res
-      .cookie("jwt", foundUser.token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 3600000,
-      })
-      .status(200)
-      .json({
-        _id: foundUser.user._id,
-        username: foundUser.user.username,
-        email: foundUser.user.email,
-        profilePic: foundUser.user.profilePic,
-      });
+    res.cookie("jwt", foundUser.token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+    });
+
+    res.status(200).json({
+      _id: foundUser.user._id,
+      username: foundUser.user.username,
+      email: foundUser.user.email,
+      profilePic: foundUser.user.profilePic,
+    });
   } catch (error) {
     const errorMessage = getErrorMessage(error);
     console.error(errorMessage);
     res.status(400).json({
       message: "Login failed",
       error: getErrorMessage(error),
+    });
+  }
+};
+
+export const logout = (req: Request, res: Response) => {
+  try {
+    res
+      .clearCookie("jwt", {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+      })
+      .status(200)
+      .json({ message: "User logged out successfully." });
+  } catch (error) {
+    console.error("Error during logout:", error);
+
+    res.status(500).json({
+      message: "Logout failed due to a server error.",
+      error: error instanceof Error ? error.message : String(error),
     });
   }
 };
